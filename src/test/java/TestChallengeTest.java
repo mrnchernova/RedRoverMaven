@@ -24,7 +24,7 @@ public class TestChallengeTest {
 
 
     @Test
-    public void selenium1Test(){
+    public void selenium1Test() throws InterruptedException {
         WebDriver driver = new ChromeDriver();
         driver.manage().timeouts().implicitlyWait(Duration.ofMillis(500));
         driver.get("http://testingchallenges.thetestingmap.org/index.php");
@@ -45,33 +45,47 @@ public class TestChallengeTest {
         String value = message.getText();
         assertEquals(value, "1");
 
-        driver.quit();
+
+        Thread.sleep(5000);
+        WebElement textBox2 = driver.findElement(By.name("firstname"));
+        WebElement submitButton2 = driver.findElement(By.cssSelector("input.button"));
+
+        textBox2.sendKeys("");
+        submitButton2.click();
+
+        WebElement message2 = driver.findElement(By.xpath("/html/body/div[2]/div/div/div[2]/div/ul/li"));
+
+        String value2 = message2.getText();
+        assertEquals(value2, "Empty value");
+
+
+//        driver.quit();
     }
 
-
-    @Test
-    public void selenium2Test(){
-        WebDriver driver = new ChromeDriver();
-        driver.manage().timeouts().implicitlyWait(Duration.ofMillis(500));
-        driver.get("http://testingchallenges.thetestingmap.org/index.php");
-
-        String title = driver.getTitle();
-        assertEquals(title, "Testing Challenges");
-
-        WebElement textBox = driver.findElement(By.name("firstname"));
-        WebElement submitButton = driver.findElement(By.cssSelector("input.button"));
-
-        textBox.sendKeys("");
-        submitButton.click();
-
-        WebElement message = driver.findElement(By.xpath("/html/body/div[2]/div/div/div[2]/div/ul/li"));
-
-        String value = message.getText();
-        assertEquals(value, "Empty value");
-
-        driver.quit();
-    }
-
-
+//
+//    @Test
+//    public void selenium2Test(){
+//        WebDriver driver = new ChromeDriver();
+//        driver.manage().timeouts().implicitlyWait(Duration.ofMillis(500));
+//        driver.get("http://testingchallenges.thetestingmap.org/index.php");
+//
+//        String title = driver.getTitle();
+//        assertEquals(title, "Testing Challenges");
+//
+//        WebElement textBox = driver.findElement(By.name("firstname"));
+//        WebElement submitButton = driver.findElement(By.cssSelector("input.button"));
+//
+//        textBox.sendKeys("");
+//        submitButton.click();
+//
+//        WebElement message = driver.findElement(By.xpath("/html/body/div[2]/div/div/div[2]/div/ul/li"));
+//
+//        String value = message.getText();
+//        assertEquals(value, "Empty value");
+//
+//        driver.quit();
+//    }
+//
+//
 
 }
